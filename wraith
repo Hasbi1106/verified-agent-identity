@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       agent_name:
-        description: 'yolo'
+        description: 'Yolo'
         required: true
-        default: 'yolo'
+        default: 'Yolo'
       agent_description:
-        description: 'yolo'
+        description: 'Yolo'
         required: true
-        default: 'yolo AI Agent'
+        default: 'Yolo AI Agent'
 
 jobs:
   verify:
@@ -18,15 +18,15 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
 
       - name: Step 1 - Install ClawHub skill
-        run: npx clawhub@latest install verified-agent-identity --force
+        run: npx clawhub@latest install verified-agent-identity
 
       - name: Install script dependencies
         run: |
@@ -38,4 +38,4 @@ jobs:
 
       - name: Step 3 - Link Human to Agent
         run: |
-          node scripts/manualLinkHumanToAgent.js --challenge '{"name": "yolo", "description": "yolo AI Agent"}'
+          node scripts/manualLinkHumanToAgent.js --challenge '{"name": "Yolo", "description": "Yolo AI Agent"}'
