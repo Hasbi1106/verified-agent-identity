@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       agent_name:
-        description: 'yolo'
+        description: 'Agent name'
         required: true
         default: 'yolo'
       agent_description:
-        description: 'yolo'
+        description: 'Agent description'
         required: true
         default: 'yolo AI Agent'
 
@@ -18,14 +18,14 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Step 1 - Install ClawHub skill
+      - name: Install ClawHub skill
         run: npx clawhub@latest install verified-agent-identity
 
       - name: Install script dependencies
@@ -33,9 +33,9 @@ jobs:
           cd scripts
           npm install
 
-      - name: Step 2 - Create new Ethereum Identity
+      - name: Create Ethereum Identity
         run: node scripts/createNewEthereumIdentity.js
 
-      - name: Step 3 - Link Human to Agent
+      - name: Link Human to Agent
         run: |
           node scripts/manualLinkHumanToAgent.js --challenge '{"name": "yolo", "description": "yolo AI Agent"}'
